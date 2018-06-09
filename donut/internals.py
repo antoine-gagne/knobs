@@ -1,8 +1,8 @@
 
 import logging
 
-from donut.classes import DonutFlag
-from donut.classes import DonutToggle
+from donut.controllers import DonutFlag
+from donut.controllers import DonutToggle
 
 
 log = logging.getLogger('donut.internals')
@@ -32,9 +32,13 @@ class DonutInternals(object):
     def add_flag(name, conditions):
         if DonutInternals.validate_key_available(name):
             new_flag = DonutFlag(name, conditions=conditions)
-            DonutInternals.__variables[name] = new_flag
+            DonutInternals.__flags[name] = new_flag
         else:
             log.warning('Name already in use.')
+
+    @staticmethod
+    def get_flag(name):
+        return DonutInternals.__flags.get(name, None)
 
     @staticmethod
     def add_toggle(name, active_state):

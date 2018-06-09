@@ -1,3 +1,8 @@
+"""Controllers are the switcher elements in Donut.
+
+They return True or False depending on their implementation.
+"""
+
 import logging
 
 log = logging.getLogger('donut')
@@ -10,6 +15,7 @@ class DonutController(object):
         """Save all important things here."""
 
     def is_active(self):
+        """Return a bool depending on implementation."""
         raise NotImplementedError
 
 
@@ -42,3 +48,6 @@ class DonutFlag(DonutController):
 
     def is_active(self):
         return False
+
+    def add_condition(self, new_condition):
+        self.conditions.append(new_condition)
